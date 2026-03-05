@@ -1,7 +1,9 @@
 //importimng react and useState for state managements
 import React, { useState } from 'react';
-//importing the axios module for making HTTP requests
-import axios from 'axios';
+//importing the centralized api instance
+import api from '../services/api';
+// currency formatter lives here so we're not duplicating it across components
+import formatCurrency from '../utils/formatCurrency';
 //imports the custom styling file for the ViewAccount.js file
 import '../styling/View.css';
 
@@ -26,7 +28,7 @@ const ViewAccount = () => {
     setError('');
     try {
       // get request to fetch the account data by the account id
-      const response = await axios.get(`http://localhost:4000/Account/accounts/${accountId}`);
+      const response = await api.get(`/Account/accounts/${accountId}`);
       setAccount(response.data);
       setError('');
     } catch (error) {
@@ -38,14 +40,6 @@ const ViewAccount = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  //function to help format the account balance as a currency value in kenya shillings
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'KES'
-    }).format(amount);
   };
 
   return (

@@ -1,7 +1,7 @@
 //importing the react and useState hook
 import React, { useState } from 'react';
-//importing the axios module for making http requests
-import axios from 'axios';
+//importing the centralized api instance
+import api from '../services/api';
 //importing the custom css fro styling the form
 import '../styling/CreateForm.css';
 
@@ -23,7 +23,7 @@ const CreateAccountForm = () => {
     e.preventDefault();
     try {
       //sending a post request when creating an account
-      const response = await axios.post('http://localhost:4000/Account/accounts', {
+      const response = await api.post('/Account/accounts', {
         name, //passes the name
         balance: parseFloat(balance), //converts the balance into a float
       });

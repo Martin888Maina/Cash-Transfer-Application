@@ -1,7 +1,7 @@
 //importing react hooks
 import React, { useState, useEffect } from 'react';
-//importing axios module for making http requests
-import axios from 'axios';
+//importing the centralized api instance
+import api from '../services/api';
 //importing the custom styling file for the transfer form 
 import '../styling/TransferForm.css';
 
@@ -26,7 +26,7 @@ const TransferForm = () => {
   const fetchAccountName = async (accountId, type) => {
     try {
       //send get request to fetch account details
-      const response = await axios.get(`http://localhost:4000/Account/accounts/${accountId}`);
+      const response = await api.get(`/Account/accounts/${accountId}`);
       //set yhe account name depending on the type
       if (type === 'from') {
         setFromAccountName(response.data.name);
@@ -59,7 +59,7 @@ const TransferForm = () => {
     e.preventDefault();
     try {
       //send post request to start transfer
-      await axios.post('http://localhost:4000/Transfer/transfers', {
+      await api.post('/Transfer/transfers', {
         from_account_id: fromAccount,
         to_account_id: toAccount,
         amount: parseFloat(amount),
