@@ -34,9 +34,11 @@ const apiLimiter = rateLimit({
   message: { error: { status: 429, message: 'Too many requests. Please try again later.' } },
 });
 
+const authRoute     = require('./routes/authRoutes');
 const accountRoute  = require('./routes/accountRoutes');
 const transferRoute = require('./routes/transferRoutes');
 
+app.use('/Auth', authLimiter, authRoute);
 app.use('/Account', apiLimiter, accountRoute);
 app.use('/Transfer', apiLimiter, transferRoute);
 

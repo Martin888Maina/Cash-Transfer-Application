@@ -1,6 +1,36 @@
 //importing the joi validation library for validation
 const Joi = require('joi');
 
+// schema for new user registration
+const registerSchema = Joi.object({
+    name: Joi.string().trim().required().messages({
+        'string.empty': 'Name is required.',
+        'any.required': 'Name is required.',
+    }),
+    email: Joi.string().email().required().messages({
+        'string.email': 'Please provide a valid email address.',
+        'string.empty': 'Email is required.',
+        'any.required': 'Email is required.',
+    }),
+    // minimum 6 characters enforced here and in the controller
+    password: Joi.string().min(6).required().messages({
+        'string.min': 'Password must be at least 6 characters.',
+        'string.empty': 'Password is required.',
+        'any.required': 'Password is required.',
+    }),
+});
+
+// schema for login
+const loginSchema = Joi.object({
+    email: Joi.string().email().required().messages({
+        'string.email': 'Please provide a valid email address.',
+        'any.required': 'Email is required.',
+    }),
+    password: Joi.string().required().messages({
+        'any.required': 'Password is required.',
+    }),
+});
+
 //validation for the account creation process
 const accountCreationSchema = Joi.object({
     //validate the name field to be a non-empty string
@@ -37,6 +67,8 @@ const transferSchema = Joi.object({
 
 //exporting the validation schemas to be used in the controller files
 module.exports = {
+    registerSchema,
+    loginSchema,
     accountCreationSchema,
     transferSchema
 };

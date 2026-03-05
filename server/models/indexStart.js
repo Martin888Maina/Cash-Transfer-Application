@@ -26,9 +26,10 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// Definingthe account and transfer models
-db.accounts = require('./accountModel.js')(sequelize, DataTypes);
+// register all models
+db.accounts  = require('./accountModel.js')(sequelize, DataTypes);
 db.transfers = require('./transferModel.js')(sequelize, DataTypes);
+db.users     = require('./userModel.js')(sequelize, DataTypes);
 
 // Establishing relationships between models
 //Account can have many outgoing Transfers.

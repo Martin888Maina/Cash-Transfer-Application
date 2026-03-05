@@ -1,54 +1,94 @@
-/* navbar.css */
-nav {
-    background-color: #1a365d;  /* Dark blue background */
-    padding: 1rem 2rem;          /* Padding for space around the navbar */
-  }
-  
-  ul {
+/* navbar styles */
+
+.navbar {
+    background-color: #1a365d;
+    padding: 0 2rem;
     display: flex;
-    justify-content: center;     /* Center the links horizontally */
-    list-style-type: none;       /* Remove default list styling */
-    margin: 0;                   /* Remove default margin */
-    padding: 0;                  /* Remove default padding */
-  }
-  
-  li {
-    margin: 0 1.5rem;            /* Space out the list items */
-  }
-  
-  a {
-    text-decoration: none;       /* Remove underline from links */
-    color: white;                /* Set link color to white */
-    font-size: 1.2rem;           /* Set font size */
-    font-weight: 600;            /* Make the text bold */
-    transition: all 0.3s ease;   /* Smooth transition for hover effect */
-  }
-  
-  a:hover {
-    color: #4299e1;              /* Change color on hover */
-    text-decoration: underline;  /* Underline the link on hover */
-  }
-  
-  a:active {
-    color: #667eea;              /* Change color on click */
-  }
-  
-  @media (max-width: 768px) {
-    nav {
-      padding: 1rem;             /* Adjust padding for smaller screens */
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand a {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.navbar-brand a:hover {
+    color: #90caf9;
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.25rem;
+}
+
+.navbar-links li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.navbar-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.navbar-user span {
+    color: #90caf9;
+    font-size: 0.875rem;
+    padding: 6px 12px;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #e0e0e0;
+    font-size: 0.875rem;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 12px 1rem;
+        gap: 10px;
     }
-  
-    ul {
-      flex-direction: column;    /* Stack the links vertically */
-      align-items: center;       /* Center the links */
+
+    .navbar-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
     }
-  
-    li {
-      margin: 0.5rem 0;           /* Reduce space between list items */
+
+    .navbar-links li a {
+        font-size: 0.825rem;
+        padding: 5px 10px;
     }
-  
-    a {
-      font-size: 1rem;           /* Reduce font size on smaller screens */
-    }
-  }
-  
+}

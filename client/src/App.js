@@ -1,30 +1,45 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // Import Routes and Route from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
-import MainPage from './components/MainPage';  // Import the MainPage
+import ProtectedRoute from './components/auth/ProtectedRoute';
+
+import MainPage from './components/MainPage';
+import LoginForm from './components/auth/LoginForm';
+import RegisterForm from './components/auth/RegisterForm';
 import CreateAccountForm from './components/CreateAccountForm';
 import ViewAccount from './components/ViewAccount';
 import TransferForm from './components/TransferForm';
 
 const App = () => {
-  return (
-    <Router>
-      <div className="App">
-        {/* <h1>Money Transfer App</h1> */}
-        <Navbar />
+    return (
+        <AuthProvider>
+            <Router>
+                <div className="App">
+                    <Navbar />
 
-        {/* Define Routes for different pages */}
-        <Routes>
-          <Route path="/" element={<MainPage />} /> {/* Add the MainPage as the default route */}
-          <Route path="/create-account" element={<CreateAccountForm />} />
-          <Route path="/view-account" element={<ViewAccount />} />
-          <Route path="/transfer" element={<TransferForm />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+                    <Routes>
+                        {/* public routes */}
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="/login" element={<LoginForm />} />
+                        <Route path="/register" element={<RegisterForm />} />
+
+                        {/* protected routes — redirect to /login if not authenticated */}
+                        <Route path="/create-account" element={
+                            <ProtectedRoute><CreateAccountForm /></ProtectedRoute>
+                        } />
+                        <Route path="/view-account" element={
+                            <ProtectedRoute><ViewAccount /></ProtectedRoute>
+                        } />
+                        <Route path="/transfer" element={
+                            <ProtectedRoute><TransferForm /></ProtectedRoute>
+                        } />
+                    </Routes>
+                </div>
+            </Router>
+        </AuthProvider>
+    );
 };
 
 export default App;
-
