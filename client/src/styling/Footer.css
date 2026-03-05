@@ -1,0 +1,14 @@
+/* footer — simple, stays at the bottom */
+
+.footer {
+    background-color: #1a365d;
+    color: #b0bec5;
+    text-align: center;
+    padding: 16px;
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+
+.footer-text {
+    margin: 0;
+}
