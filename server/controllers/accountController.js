@@ -55,6 +55,71 @@ module.exports = {
     },
     
 
+    // list every account — used by the accounts page
+    getAllAccounts: async (req, res, next) => {
+        try {
+            const accounts = await Account.findAll({
+                order: [['createdAt', 'DESC']],
+            });
+            res.status(200).json({ success: true, data: accounts });
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    // delete an account — only allowed if balance is zero
+    deleteAccount: async (req, res, next) => {
+        try {
+            const account = await Account.findByPk(req.params.id);
+
+            if (!account) {
+                throw createError(404, 'Account not found');
+            }
+
+            // bail out if there's still money in the account
+            if (account.balance > 0) {
+                throw createError(400, 'Cannot delete an account with a remaining balance. Transfer funds out first.');
+            }
+
+            await account.destroy();
+            res.status(200).json({ success: true, data: { message: 'Account deleted successfully' } });
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    // summary stats for the dashboard card section
+    getStats: async (req, res, next) => {
+        try {
+            const totalAccounts = await Account.count();
+            const totalTransfers = await Transfer.count();
+
+            // sum up all account balances
+            const balanceResult = await Account.findOne({
+                attributes: [[db.sequelize.fn('SUM', db.sequelize.col('balance')), 'total']],
+                raw: true,
+            });
+            const totalBalance = parseFloat(balanceResult?.total) || 0;
+
+            // grab the 5 most recent transfers with sender and receiver names
+            const recentTransfers = await Transfer.findAll({
+                limit: 5,
+                order: [['createdAt', 'DESC']],
+                include: [
+                    { model: Account, as: 'sender', attributes: ['id', 'name'] },
+                    { model: Account, as: 'receiver', attributes: ['id', 'name'] },
+                ],
+            });
+
+            res.status(200).json({
+                success: true,
+                data: { totalAccounts, totalTransfers, totalBalance, recentTransfers },
+            });
+        } catch (error) {
+            next(error);
+        }
+    },
+
     // Handles money transfer from one user account to the other
     createTransfer: async (req, res, next) => {
         // Validate input using the transferSchema in the validation_Schema.js file
@@ -115,6 +180,22 @@ module.exports = {
             await transaction.rollback();
             next(error); // Handle any errors
         }
-    }
+    },
+
+    // full transfer list with sender and receiver account names
+    getAllTransfers: async (req, res, next) => {
+        try {
+            const transfers = await Transfer.findAll({
+                order: [['createdAt', 'DESC']],
+                include: [
+                    { model: Account, as: 'sender', attributes: ['id', 'name'] },
+                    { model: Account, as: 'receiver', attributes: ['id', 'name'] },
+                ],
+            });
+            res.status(200).json({ success: true, data: transfers });
+        } catch (error) {
+            next(error);
+        }
+    },
 };
 

@@ -5,5 +5,6 @@ const authenticateToken = require('../middleware/auth');
 
 // transfer routes require a valid token
 routes.post('/transfers', authenticateToken, accountController.createTransfer);
+routes.get('/transfers', authenticateToken, accountController.getAllTransfers);
 
 module.exports = routes;
