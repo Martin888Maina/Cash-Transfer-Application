@@ -1,0 +1,54 @@
+/* navbar.css */
+nav {
+    background-color: #1a365d;  /* Dark blue background */
+    padding: 1rem 2rem;          /* Padding for space around the navbar */
+  }
+  
+  ul {
+    display: flex;
+    justify-content: center;     /* Center the links horizontally */
+    list-style-type: none;       /* Remove default list styling */
+    margin: 0;                   /* Remove default margin */
+    padding: 0;                  /* Remove default padding */
+  }
+  
+  li {
+    margin: 0 1.5rem;            /* Space out the list items */
+  }
+  
+  a {
+    text-decoration: none;       /* Remove underline from links */
+    color: white;                /* Set link color to white */
+    font-size: 1.2rem;           /* Set font size */
+    font-weight: 600;            /* Make the text bold */
+    transition: all 0.3s ease;   /* Smooth transition for hover effect */
+  }
+  
+  a:hover {
+    color: #4299e1;              /* Change color on hover */
+    text-decoration: underline;  /* Underline the link on hover */
+  }
+  
+  a:active {
+    color: #667eea;              /* Change color on click */
+  }
+  
+  @media (max-width: 768px) {
+    nav {
+      padding: 1rem;             /* Adjust padding for smaller screens */
+    }
+  
+    ul {
+      flex-direction: column;    /* Stack the links vertically */
+      align-items: center;       /* Center the links */
+    }
+  
+    li {
+      margin: 0.5rem 0;           /* Reduce space between list items */
+    }
+  
+    a {
+      font-size: 1rem;           /* Reduce font size on smaller screens */
+    }
+  }
+  

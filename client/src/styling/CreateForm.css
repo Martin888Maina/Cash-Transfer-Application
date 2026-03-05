@@ -1,0 +1,137 @@
+/* CreateForm.css */
+
+/* Container for the form */
+.form-container {
+  max-width: 400px;  /* Set a max-width for the form container */
+  margin: 2rem auto;  /* Center the container with a margin on top and bottom */
+  padding: 2rem;  /* Add padding inside the container */
+  background: white;  /* Set the background color to white */
+  border-radius: 12px;  /* Round the corners of the container */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);  /* Add a subtle shadow around the container */
+}
+
+/* Style for the h2 element */
+h2 {
+  color: #2d3748;  /* Set text color */
+  font-size: 1.8rem;  /* Set font size */
+  margin-bottom: 1.5rem;  /* Add space below the heading */
+  text-align: center;  /* Center-align the heading */
+  font-weight: 600;  /* Set font weight to semi-bold */
+}
+
+/* Basic form styles */
+form {
+  display: flex;  /* Use flexbox layout */
+  flex-direction: column;  /* Arrange the form elements vertically */
+  gap: 1.5rem;  /* Add space between form elements */
+}
+
+/* Style for each form group */
+.form-group {
+  display: flex;  /* Use flexbox for form group layout */
+  flex-direction: column;  /* Stack elements vertically */
+  gap: 0.5rem;  /* Add space between label and input */
+}
+
+/* Style for the label */
+label {
+  color: #4a5568;  /* Set label text color */
+  font-size: 0.9rem;  /* Set font size for the label */
+  font-weight: 500;  /* Set font weight */
+  margin-bottom: 0.25rem;  /* Add space below the label */
+}
+
+/* Style for input fields */
+input {
+  padding: 0.75rem;  /* Add padding inside the input field */
+  border: 2px solid #e2e8f0;  /* Set a light gray border */
+  border-radius: 8px;  /* Round the corners of the input field */
+  font-size: 1rem;  /* Set the font size */
+  transition: all 0.2s ease;  /* Smooth transition for focus state */
+}
+
+/* Style for input fields when focused */
+input:focus {
+  outline: none;  /* Remove the default outline */
+  border-color: #4299e1;  /* Change border color to blue when focused */
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);  /* Add a subtle blue glow around the input */
+}
+
+/* Style for the submit button */
+button {
+  background-color: #4299e1;  /* Set the button's background color */
+  color: white;  /* Set the text color to white */
+  padding: 0.875rem;  /* Add padding inside the button */
+  border: none;  /* Remove the border */
+  border-radius: 8px;  /* Round the corners of the button */
+  font-size: 1rem;  /* Set the font size */
+  font-weight: 600;  /* Set font weight to semi-bold */
+  cursor: pointer;  /* Change the cursor to a pointer on hover */
+  transition: all 0.2s ease;  /* Smooth transition for hover and active states */
+  margin-top: 0.5rem;  /* Add space above the button */
+}
+
+/* Style for the button when hovered */
+button:hover {
+  background-color: #3182ce;  /* Change background color to a darker blue on hover */
+  transform: translateY(-1px);  /* Slightly move the button up on hover */
+}
+
+/* Style for the button when clicked (active state) */
+button:active {
+  transform: translateY(0);  /* Reset the button's position when clicked */
+}
+
+/* Styles for alert messages */
+.alert {
+  padding: 1rem;  /* Add padding inside the alert */
+  border-radius: 8px;  /* Round the corners of the alert box */
+  margin-top: 1rem;  /* Add space above the alert */
+  font-size: 0.9rem;  /* Set the font size */
+  animation: slideIn 0.3s ease;  /* Add a slide-in animation to the alert */
+}
+
+/* Styles for a successful alert message */
+.alert-success {
+  background-color: #c6f6d5;  /* Set a light green background color */
+  color: #2f855a;  /* Set text color to dark green */
+  border: 1px solid #9ae6b4;  /* Set a border with a darker green shade */
+}
+
+/* Styles for an error alert message */
+.alert-error {
+  background-color: #fed7d7;  /* Set a light red background color */
+  color: #c53030;  /* Set text color to dark red */
+  border: 1px solid #feb2b2;  /* Set a border with a darker red shade */
+}
+
+/* Keyframe animation for alert message sliding in */
+@keyframes slideIn {
+  from {
+    opacity: 0;  /* Start with opacity 0 */
+    transform: translateY(-10px);  /* Start slightly above its final position */
+  }
+  to {
+    opacity: 1;  /* End with full opacity */
+    transform: translateY(0);  /* End at its original position */
+  }
+}
+
+/* Responsive styles for smaller screen sizes */
+@media (max-width: 480px) {
+  /* Adjust form container styles for smaller screens */
+  .form-container {
+    margin: 1rem;  /* Decrease the margin */
+    padding: 1.5rem;  /* Decrease the padding */
+  }
+  
+  /* Adjust heading font size for smaller screens */
+  h2 {
+    font-size: 1.5rem;  /* Set a smaller font size */
+  }
+  
+  /* Adjust padding for input fields and button */
+  input, button {
+    padding: 0.75rem;  /* Decrease padding for better fit on small screens */
+  }
+}

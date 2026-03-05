@@ -1,0 +1,161 @@
+/* ViewAccount.css */
+
+/* Main container style for the View Account page */
+.view-container {
+  max-width: 600px;  /* Set the maximum width to 600px */
+  margin: 2rem auto;  /* Center the container with margin on top and bottom */
+  padding: 2rem;  /* Add padding inside the container */
+}
+
+/* Style for the title of the View Account section */
+.view-title {
+  color: #2d3748;  /* Set text color to dark gray */
+  font-size: 2.2rem;  /* Set font size for the title */
+  text-align: center;  /* Center-align the title */
+  margin-bottom: 2rem;  /* Add margin below the title */
+  font-weight: 700;  /* Make the title bold */
+}
+
+/* Style for the search bar container */
+.search-container {
+  display: flex;  /* Use flexbox layout for the search elements */
+  gap: 1rem;  /* Add space between the search input and button */
+  margin-bottom: 2rem;  /* Add space below the search container */
+  align-items: center;  /* Vertically align the items */
+}
+
+/* Style for the search input field */
+.search-input {
+  flex: 1;  /* Make the input field take up the available space */
+  padding: 0.875rem 1rem;  /* Add padding inside the input field */
+  border: 2px solid #e2e8f0;  /* Add light gray border */
+  border-radius: 10px;  /* Round the corners of the input field */
+  font-size: 1rem;  /* Set font size */
+  transition: all 0.2s ease;  /* Smooth transition for focus effect */
+  background: #f7fafc;  /* Set light background color */
+}
+
+/* Focus effect for search input field */
+.search-input:focus {
+  outline: none;  /* Remove default outline */
+  border-color: #4299e1;  /* Change border color to blue on focus */
+  background: white;  /* Set background to white on focus */
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);  /* Add a subtle blue shadow */
+}
+
+/* Style for the search button */
+.search-button {
+  padding: 0.875rem 1.5rem;  /* Add padding inside the button */
+  background: #4299e1;  /* Set blue background */
+  color: white;  /* Set button text color to white */
+  border: none;  /* Remove the default border */
+  border-radius: 10px;  /* Round the corners of the button */
+  font-size: 1rem;  /* Set font size */
+  font-weight: 600;  /* Set font weight to semi-bold */
+  cursor: pointer;  /* Change cursor to pointer on hover */
+  transition: all 0.2s ease;  /* Smooth transition for hover and active effects */
+}
+
+/* Hover effect for the search button */
+.search-button:hover {
+  background: #3182ce;  /* Change background to a darker blue */
+  transform: translateY(-2px);  /* Slightly lift the button */
+  box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);  /* Add a subtle shadow on hover */
+}
+
+/* Active (click) effect for the search button */
+.search-button:active {
+  transform: translateY(0);  /* Remove the lift effect when clicked */
+}
+
+/* Style for the account details container */
+.account-details {
+  background: white;  /* Set background color to white */
+  border-radius: 16px;  /* Round the corners of the container */
+  padding: 2rem;  /* Add padding inside the container */
+  margin-top: 2rem;  /* Add margin above the account details section */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);  /* Apply a soft shadow around the container */
+  animation: slideUp 0.3s ease-out;  /* Apply slide-up animation when details appear */
+}
+
+/* Style for the title of the account details section */
+.details-title {
+  color: #2d3748;  /* Set text color to dark gray */
+  font-size: 1.5rem;  /* Set font size */
+  margin-bottom: 1.5rem;  /* Add margin below the title */
+  padding-bottom: 1rem;  /* Add padding below the title */
+  border-bottom: 2px solid #e2e8f0;  /* Add a bottom border */
+  font-weight: 600;  /* Set font weight to semi-bold */
+}
+
+/* Style for individual detail items (label and value) */
+.detail-item {
+  display: flex;  /* Use flexbox to arrange the label and value side by side */
+  justify-content: space-between;  /* Spread the label and value to opposite sides */
+  padding: 1rem 0;  /* Add padding to the top and bottom of the item */
+  border-bottom: 1px solid #edf2f7;  /* Add a bottom border */
+}
+
+/* Style for the label of account details */
+.detail-label {
+  color: #718096;  /* Set text color to a lighter gray */
+  font-weight: 500;  /* Set font weight to medium */
+}
+
+/* Style for the value of account details */
+.detail-value {
+  color: #2d3748;  /* Set text color to dark gray */
+  font-weight: 600;  /* Set font weight to semi-bold */
+}
+
+/* Style for the balance value, with specific color and size */
+.balance-value {
+  color: #38a169;  /* Set green color for the balance value */
+  font-weight: 700;  /* Set font weight to bold */
+  font-size: 1.1rem;  /* Set font size slightly larger */
+}
+
+/* Keyframe animation for sliding up the account details */
+@keyframes slideUp {
+  from {
+    opacity: 0;  /* Start with the account details being invisible */
+    transform: translateY(20px);  /* Start from slightly below */
+  }
+  to {
+    opacity: 1;  /* Fade in the account details */
+    transform: translateY(0);  /* End at its original position */
+  }
+}
+
+/* Responsive Design */
+
+/* Media query for small screens (max width 640px) */
+@media (max-width: 640px) {
+  /* Adjust the view container for smaller screens */
+  .view-container {
+      margin: 1rem;  /* Reduce margin */
+      padding: 1rem;  /* Reduce padding */
+  }
+
+  /* Adjust title font size and margin for small screens */
+  .view-title {
+      font-size: 1.8rem;  /* Decrease font size */
+      margin-bottom: 1.5rem;  /* Reduce margin below the title */
+  }
+
+  /* Change search container to vertical layout on small screens */
+  .search-container {
+      flex-direction: column;  /* Stack search elements vertically */
+  }
+
+  /* Ensure input and button take up full width on small screens */
+  .search-input, 
+  .search-button {
+      width: 100%;  /* Set width to 100% for both input and button */
+  }
+
+  /* Adjust account details padding for smaller screens */
+  .account-details {
+      padding: 1.5rem;  /* Reduce padding inside the account details section */
+  }
+}

@@ -1,0 +1,136 @@
+/* MainPage.css */
+
+/* Style for the landing page container */
+.landing-page {
+    min-height: 100vh;  /* Make sure the landing page takes up the full viewport height */
+    background: linear-gradient(  /* Apply a gradient overlay on top of the background image */
+        rgba(0, 0, 0, 0.7),  /* Darker transparent gradient at the top */
+        rgba(0, 0, 0, 0.5)  /* Lighter transparent gradient at the bottom */
+    ), url('../assets/images/Transfer.png');  /* Set the background image */
+    background-size: cover;  /* Ensure the background image covers the entire container */
+    background-position: center;  /* Position the background image in the center */
+    background-attachment: fixed;  /* Keep the background fixed while scrolling */
+    display: flex;  /* Use flexbox for layout */
+    align-items: center;  /* Vertically center the content */
+    justify-content: center;  /* Horizontally center the content */
+}
+
+/* Style for the main content container */
+.main-container {
+    padding: 2rem;  /* Add padding inside the container */
+    background: rgba(255, 255, 255, 0.1);  /* Semi-transparent white background */
+    backdrop-filter: blur(10px);  /* Apply a blur effect to the background behind the container */
+    border-radius: 20px;  /* Round the corners of the container */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);  /* Apply a shadow around the container */
+    border: 1px solid rgba(255, 255, 255, 0.2);  /* Light border with some transparency */
+    width: 90%;  /* Make the container take up 90% of the available width */
+    max-width: 600px;  /* Set a maximum width of 600px for the container */
+    text-align: center;  /* Center-align the text */
+}
+
+/* Style for the app title */
+.app-title {
+    color: white;  /* Set the title text color to white */
+    font-size: 3rem;  /* Set the font size for the title */
+    margin-bottom: 2.5rem;  /* Add margin below the title */
+    font-weight: 700;  /* Make the title bold */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* Add a subtle shadow to the title */
+    animation: fadeInDown 0.8s ease-out;  /* Apply the fade-in-down animation */
+}
+
+/* Style for the container holding buttons */
+.button-container {
+    display: flex;  /* Use flexbox for layout */
+    flex-direction: column;  /* Stack buttons vertically */
+    gap: 1.2rem;  /* Add space between buttons */
+    animation: fadeInUp 0.8s ease-out;  /* Apply the fade-in-up animation */
+}
+
+/* Style for the links inside the button container */
+.button-container a {
+    text-decoration: none;  /* Remove underline from links */
+    width: 100%;  /* Make the link take up the full width of its container */
+}
+
+/* Style for the main button */
+.main-button {
+    width: 100%;  /* Make the button take up the full width */
+    padding: 1rem 2rem;  /* Add padding inside the button */
+    font-size: 1.1rem;  /* Set the font size */
+    font-weight: 600;  /* Set font weight to semi-bold */
+    color: white;  /* Set text color to white */
+    background: rgba(255, 255, 255, 0.1);  /* Set a semi-transparent background color */
+    border: 2px solid rgba(255, 255, 255, 0.2);  /* Light border with transparency */
+    border-radius: 12px;  /* Round the corners of the button */
+    cursor: pointer;  /* Change cursor to a pointer on hover */
+    transition: all 0.3s ease;  /* Smooth transition for hover/active states */
+    backdrop-filter: blur(5px);  /* Apply a slight blur effect to the button background */
+}
+
+/* Button hover effect */
+.main-button:hover {
+    background: rgba(255, 255, 255, 0.2);  /* Lighten the background on hover */
+    transform: translateY(-3px);  /* Slightly lift the button up on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);  /* Add a shadow on hover */
+}
+
+/* Button active (click) effect */
+.main-button:active {
+    transform: translateY(-1px);  /* Slightly reduce the lift when the button is clicked */
+}
+
+/* Animations */
+
+/* Animation for fading in from above */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;  /* Start with invisible */
+        transform: translateY(-30px);  /* Start slightly above its final position */
+    }
+    to {
+        opacity: 1;  /* End with full opacity */
+        transform: translateY(0);  /* End at its original position */
+    }
+}
+
+/* Animation for fading in from below */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;  /* Start with invisible */
+        transform: translateY(30px);  /* Start slightly below its final position */
+    }
+    to {
+        opacity: 1;  /* End with full opacity */
+        transform: translateY(0);  /* End at its original position */
+    }
+}
+
+/* Responsive Design */
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+    .main-container {
+        width: 95%;  /* Increase container width to 95% on smaller screens */
+        padding: 1.5rem;  /* Reduce padding */
+    }
+
+    .app-title {
+        font-size: 2.5rem;  /* Reduce font size for the title */
+        margin-bottom: 2rem;  /* Reduce the margin below the title */
+    }
+
+    .main-button {
+        padding: 0.8rem 1.5rem;  /* Reduce padding on buttons */
+        font-size: 1rem;  /* Reduce font size on buttons */
+    }
+}
+
+/* Add hover effect for better touch device feedback */
+
+/* Media query for devices that don't support hover (touch devices) */
+@media (hover: none) {
+    .main-button:hover {
+        transform: none;  /* Disable hover effect on touch devices */
+        background: rgba(255, 255, 255, 0.15);  /* Change background color slightly */
+    }
+}
