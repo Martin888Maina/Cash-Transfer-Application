@@ -1,145 +1,129 @@
-//importing react hooks
 import React, { useState, useEffect } from 'react';
-//importing the centralized api instance
 import api from '../services/api';
-//importing the custom styling file for the transfer form 
 import '../styling/TransferForm.css';
 
 const TransferForm = () => {
-  //state variables to manage form inputs and account information
-  //handles the sender account id
-  const [fromAccount, setFromAccount] = useState('');
-  //handles the reciever account id
-  const [toAccount, setToAccount] = useState('');
-  //handles the amount
-  const [amount, setAmount] = useState('');
-  //handles the sender aaccount name
-  const [fromAccountName, setFromAccountName] = useState('');
-  //handles the receiver account name
-  const [toAccountName, setToAccountName] = useState('');
-  //handles the alert messages
-  const [alertMessage, setAlertMessage] = useState('');
-  //handles the alert notifications
-  const [alertType, setAlertType] = useState('');
+    const [accounts, setAccounts] = useState([]);
+    const [fromUuid, setFromUuid] = useState('');
+    const [toUuid, setToUuid] = useState('');
+    const [amount, setAmount] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState('');
+    const [loadingAccounts, setLoadingAccounts] = useState(true);
 
-  // Function to fetch account name by ID
-  const fetchAccountName = async (accountId, type) => {
-    try {
-      //send get request to fetch account details
-      const response = await api.get(`/Account/accounts/${accountId}`);
-      //set yhe account name depending on the type
-      if (type === 'from') {
-        setFromAccountName(response.data.name);
-      } else if (type === 'to') {
-        setToAccountName(response.data.name);
-      }
-    } catch (error) {
-      // silently ignore — the account name hint is non-critical
-    }
-  };
+    // load the account list so users pick from a dropdown instead of typing raw IDs
+    useEffect(() => {
+        const fetchAccounts = async () => {
+            try {
+                const response = await api.get('/Account/accounts');
+                setAccounts(response.data.data);
+            } catch (err) {
+                setAlertMessage('Failed to load accounts. Please refresh the page.');
+                setAlertType('error');
+            } finally {
+                setLoadingAccounts(false);
+            }
+        };
+        fetchAccounts();
+    }, []);
 
-  // Effect to fetch account names when the account IDs change
-  useEffect(() => {
-    if (fromAccount) {
-      fetchAccountName(fromAccount, 'from');
-    }
-  }, [fromAccount]);
-  // useEffect to fetch recipient's account name when the recipient's account ID changes
-  useEffect(() => {
-    if (toAccount) {
-      fetchAccountName(toAccount, 'to');
-    }
-  }, [toAccount]);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setAlertMessage('');
 
+        if (fromUuid === toUuid) {
+            setAlertMessage('Sender and recipient cannot be the same account.');
+            setAlertType('error');
+            return;
+        }
 
-  //handle form submission
-  const handleSubmit = async (e) => {
-    //prevent page reloads on form submit
-    e.preventDefault();
-    try {
-      //send post request to start transfer
-      await api.post('/Transfer/transfers', {
-        from_account_id: fromAccount,
-        to_account_id: toAccount,
-        amount: parseFloat(amount),
-      });
-      //sets success message
-      setAlertMessage('Transfer successful');
-      setAlertType('success');
-      
-      // Clear form after successful transfer
-      setFromAccount('');
-      setToAccount('');
-      setAmount('');
-      setFromAccountName('');
-      setToAccountName('');
-    } catch (error) {
-      // show the server's reason if it gave one (e.g. "Insufficient funds")
-      const msg = error.response?.data?.error?.message || 'Failed to transfer money. Please try again.';
-      setAlertMessage(msg);
-      setAlertType('error');
-    }
-  };
+        try {
+            // send uuids to the backend — it resolves them to internal ids
+            await api.post('/Transfer/transfers', {
+                from_account_uuid: fromUuid,
+                to_account_uuid: toUuid,
+                amount: parseFloat(amount),
+            });
 
-  return (
-    <div className="transfer-container">
-      {/* form title */}
-      <h2 className="transfer-title">Transfer Money</h2>
-      <form className="transfer-form" onSubmit={handleSubmit}>
-        <div className="form-field">
-          {/* sender account id */}
-          <label className="form-label">From Account ID:</label>
-          <input
-            className="form-input"
-            type="number"
-            value={fromAccount}
-            //updates the state when changes occur
-            onChange={(e) => setFromAccount(e.target.value)}
-            placeholder="Enter sender's account ID"
-            required
-          />
-          {fromAccountName && <div className="account-name">Sender: {fromAccountName}</div>}
+            setAlertMessage('Transfer successful.');
+            setAlertType('success');
+            setFromUuid('');
+            setToUuid('');
+            setAmount('');
+        } catch (error) {
+            const msg = error.response?.data?.error?.message || 'Failed to transfer money. Please try again.';
+            setAlertMessage(msg);
+            setAlertType('error');
+        }
+    };
+
+    return (
+        <div className="transfer-container">
+            <h2 className="transfer-title">Transfer Money</h2>
+
+            <form className="transfer-form" onSubmit={handleSubmit}>
+                <div className="form-field">
+                    <label className="form-label">From Account:</label>
+                    <select
+                        className="form-input"
+                        value={fromUuid}
+                        onChange={(e) => setFromUuid(e.target.value)}
+                        required
+                        disabled={loadingAccounts}
+                    >
+                        <option value="">{loadingAccounts ? 'Loading accounts...' : 'Select sender account'}</option>
+                        {accounts.map((acc) => (
+                            <option key={acc.uuid} value={acc.uuid}>
+                                {acc.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="form-field">
+                    <label className="form-label">To Account:</label>
+                    <select
+                        className="form-input"
+                        value={toUuid}
+                        onChange={(e) => setToUuid(e.target.value)}
+                        required
+                        disabled={loadingAccounts}
+                    >
+                        <option value="">{loadingAccounts ? 'Loading accounts...' : 'Select recipient account'}</option>
+                        {accounts.map((acc) => (
+                            <option key={acc.uuid} value={acc.uuid}>
+                                {acc.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="form-field">
+                    <label className="form-label">Amount (KES):</label>
+                    <input
+                        className="form-input"
+                        type="number"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        placeholder="Enter amount to transfer"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    />
+                </div>
+
+                <button className="transfer-button" type="submit">
+                    Transfer Money
+                </button>
+
+                {alertMessage && (
+                    <div className={`alert alert-${alertType}`}>
+                        {alertMessage}
+                    </div>
+                )}
+            </form>
         </div>
-        <div className="form-field">
-          {/* receiver account id */}
-          <label className="form-label">To Account ID:</label>
-          <input
-            className="form-input"
-            type="number"
-            value={toAccount}
-            //updates the state when changes occur
-            onChange={(e) => setToAccount(e.target.value)}
-            placeholder="Enter recipient's account ID"
-            required
-          />
-          {toAccountName && <div className="account-name">Recipient: {toAccountName}</div>}
-        </div>
-        <div className="form-field">
-          {/* transfer amount field */}
-          <label className="form-label">Amount:</label>
-          <input
-            className="form-input"
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Enter amount to transfer"
-            required
-          />
-        </div>
-        {/* submit button for transfers */}
-        <button className="transfer-button" type="submit">
-          Transfer Money
-        </button>
-        {/* display alert message conditionally */}
-        {alertMessage && (
-          <div className={`alert alert-${alertType}`}>
-            {alertMessage}
-          </div>
-        )}
-      </form>
-    </div>
-  );
+    );
 };
 
-//exports the trabsferForm component to be used elsewhere in the application
 export default TransferForm;

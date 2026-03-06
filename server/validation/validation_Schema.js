@@ -45,24 +45,21 @@ const accountCreationSchema = Joi.object({
     }),
 });
 
-// Validation for money transfer (POST /transfers)
+// Validation for money transfer — accepts uuids now instead of integer ids
 const transferSchema = Joi.object({
-    //validate the from_account_id field to be a number and be required
-    from_account_id: Joi.number().required().messages({
-        'any.required': 'From account ID is required and must be a valid number',
-        'number.base': 'From account ID must be a valid number'
+    from_account_uuid: Joi.string().uuid().required().messages({
+        'any.required': 'From account UUID is required',
+        'string.guid': 'From account UUID must be a valid UUID',
     }),
-    //validate the from_account_id field to be a number and be required
-    to_account_id: Joi.number().required().messages({
-        'any.required': 'To account ID is required and must be a valid number',
-        'number.base': 'To account ID must be a valid number'
+    to_account_uuid: Joi.string().uuid().required().messages({
+        'any.required': 'To account UUID is required',
+        'string.guid': 'To account UUID must be a valid UUID',
     }),
-    //validate the amount field to be a number and be required
     amount: Joi.number().positive().required().messages({
         'any.required': 'Amount is required and must be a positive number',
         'number.base': 'Amount must be a valid number',
-        'number.positive': 'Amount must be a positive number'
-    })
+        'number.positive': 'Amount must be a positive number',
+    }),
 });
 
 //exporting the validation schemas to be used in the controller files

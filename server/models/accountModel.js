@@ -1,32 +1,34 @@
-//This file is responsible for the  creating the tables for the account data
-const db = require('../models/indexStart');
-// This is the ORM LEVEL. An ORM allows developers to interact with relational database.
-// Sequelize allows a developer to developer to create table content without having to manually create them in the database.
 module.exports = (sequelize, DataTypes) => {
-    //we are giving the model variable the name account so we can use it the rest of the code
     const Account = sequelize.define('account', {
-        //id column
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
-        //name column
+        // public-facing identifier — users see this instead of the integer id
+        uuid: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        //balance column
         balance: {
             type: DataTypes.FLOAT,
             allowNull: false,
-            //sets default value to zero
             defaultValue: 0,
             validate: {
-                //endure it is a fload datatype
                 isFloat: true,
-                // Prevent negative balances
-                min: 0, 
+                min: 0,
+            },
+        },
+    }, {
+        hooks: {
+            // generate a uuid before each new account is inserted
+            beforeCreate: (account) => {
+                account.uuid = require('crypto').randomUUID();
             },
         },
     });

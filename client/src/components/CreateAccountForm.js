@@ -28,7 +28,7 @@ const CreateAccountForm = () => {
         balance: parseFloat(balance), //converts the balance into a float
       });
       //displays success message when account is created
-      setAlertMessage(`Account created with ID: ${response.data.id}`);
+      setAlertMessage(`Account created. ID: ${response.data.data.uuid}`);
       setAlertType('success');
     } catch (error) {
       const msg = error.response?.data?.error?.message || 'Failed to create account. Please try again.';
