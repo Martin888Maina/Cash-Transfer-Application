@@ -34,8 +34,7 @@ const TransferForm = () => {
         setToAccountName(response.data.name);
       }
     } catch (error) {
-      //logs the error message in the console
-      console.error('Error fetching account name', error);
+      // silently ignore — the account name hint is non-critical
     }
   };
 
