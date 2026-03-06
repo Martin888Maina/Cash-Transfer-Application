@@ -1,9 +1,9 @@
 /* accounts page — search by ID and full account list */
 
 .view-container {
-    max-width: 760px;
-    margin: 40px auto;
-    padding: 0 24px 40px;
+    max-width: 1000px;
+    margin: 48px auto;
+    padding: 0 32px 48px;
 }
 
 .view-title {
@@ -149,20 +149,21 @@
 
 .accounts-table th {
     text-align: left;
-    padding: 12px 16px;
+    padding: 16px 20px;
     background-color: #f5f5f5;
     color: #424242;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.4px;
     border-bottom: 1px solid #e0e0e0;
 }
 
 .accounts-table td {
-    padding: 12px 16px;
+    padding: 16px 20px;
     border-bottom: 1px solid #f0f0f0;
     color: #424242;
+    font-size: 0.95rem;
 }
 
 .accounts-table tr:last-child td {

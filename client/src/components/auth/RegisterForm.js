@@ -7,6 +7,8 @@ const RegisterForm = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const { register } = useAuth();
     const navigate = useNavigate();
@@ -33,8 +35,8 @@ const RegisterForm = () => {
 
         try {
             await register(formData.name, formData.email, formData.password);
-            // auto-login happens inside register(), just redirect
-            navigate('/dashboard');
+            // registration done — send them to login to sign in properly
+            navigate('/login', { state: { registered: true } });
         } catch (err) {
             const msg = err.response?.data?.error?.message || 'Registration failed. Please try again.';
             setError(msg);
@@ -49,9 +51,7 @@ const RegisterForm = () => {
                 <h2 className="auth-title">Create an account</h2>
                 <p className="auth-subtitle">Get started with Cash Transfer</p>
 
-                {error && (
-                    <div className="auth-error">{error}</div>
-                )}
+                {error && <div className="auth-error">{error}</div>}
 
                 <form onSubmit={handleSubmit} className="auth-form">
                     <div className="form-group">
@@ -82,28 +82,48 @@ const RegisterForm = () => {
 
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            placeholder="Min. 6 characters"
-                            required
-                        />
+                        <div className="password-wrapper">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                id="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                placeholder="Min. 6 characters"
+                                required
+                            />
+                            <button
+                                type="button"
+                                className="eye-toggle"
+                                onClick={() => setShowPassword(!showPassword)}
+                                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                            >
+                                {showPassword ? '🙈' : '👁'}
+                            </button>
+                        </div>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="confirmPassword">Confirm password</label>
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            placeholder="Repeat your password"
-                            required
-                        />
+                        <div className="password-wrapper">
+                            <input
+                                type={showConfirm ? 'text' : 'password'}
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
+                                placeholder="Repeat your password"
+                                required
+                            />
+                            <button
+                                type="button"
+                                className="eye-toggle"
+                                onClick={() => setShowConfirm(!showConfirm)}
+                                aria-label={showConfirm ? 'Hide password' : 'Show password'}
+                            >
+                                {showConfirm ? '🙈' : '👁'}
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" className="auth-btn" disabled={loading}>

@@ -1,46 +1,46 @@
 /* create account form */
 
 .form-container {
-    max-width: 440px;
-    margin: 40px auto;
-    padding: 36px;
+    max-width: 620px;
+    margin: 48px auto;
+    padding: 52px 56px;
     background: #ffffff;
-    border-radius: 10px;
+    border-radius: 12px;
     border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .form-container h2 {
     color: #212121;
-    font-size: 1.6rem;
+    font-size: 1.9rem;
     font-weight: 700;
-    margin: 0 0 24px;
+    margin: 0 0 32px;
     text-align: center;
 }
 
 .form-container form {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 24px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .form-group label {
     color: #424242;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
 .form-group input {
-    padding: 10px 12px;
+    padding: 14px 16px;
     border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    font-size: 0.95rem;
+    border-radius: 8px;
+    font-size: 1rem;
     color: #212121;
     background: #fafafa;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -57,13 +57,13 @@
 .form-container button[type="submit"] {
     background-color: #1a73e8;
     color: #ffffff;
-    padding: 11px;
+    padding: 15px;
     border: none;
-    border-radius: 6px;
-    font-size: 0.95rem;
+    border-radius: 8px;
+    font-size: 1.05rem;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 4px;
+    margin-top: 8px;
     transition: background-color 0.2s;
 }
 

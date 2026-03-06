@@ -136,8 +136,8 @@ const ViewAccount = () => {
                             <tbody>
                                 {accounts.map((acc) => (
                                     <tr key={acc.uuid}>
-                                        <td className="uuid-cell" title={acc.uuid}>
-                                            {acc.uuid.slice(0, 8)}…
+                                        <td className="uuid-cell">
+                                            {acc.uuid}
                                         </td>
                                         <td>{acc.name}</td>
                                         <td className="balance-cell">{formatCurrency(acc.balance)}</td>

@@ -33,16 +33,11 @@ export const AuthProvider = ({ children }) => {
         return newUser;
     };
 
+    // register creates the account but does NOT log the user in —
+    // they must sign in manually after registration
     const register = async (name, email, password) => {
         const response = await api.post('/Auth/register', { name, email, password });
-        const { token: newToken, user: newUser } = response.data.data;
-
-        localStorage.setItem('token', newToken);
-        localStorage.setItem('user', JSON.stringify(newUser));
-        setToken(newToken);
-        setUser(newUser);
-
-        return newUser;
+        return response.data.data.user;
     };
 
     const logout = () => {
@@ -61,7 +56,6 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-// small hook so components don't have to import useContext + AuthContext every time
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {

@@ -45,15 +45,15 @@ const accountCreationSchema = Joi.object({
     }),
 });
 
-// Validation for money transfer — accepts uuids now instead of integer ids
+// Validation for money transfer — accepts 8-character hex short IDs
 const transferSchema = Joi.object({
-    from_account_uuid: Joi.string().uuid().required().messages({
-        'any.required': 'From account UUID is required',
-        'string.guid': 'From account UUID must be a valid UUID',
+    from_account_uuid: Joi.string().length(8).required().messages({
+        'any.required': 'From account ID is required',
+        'string.length': 'From account ID must be a valid account ID',
     }),
-    to_account_uuid: Joi.string().uuid().required().messages({
-        'any.required': 'To account UUID is required',
-        'string.guid': 'To account UUID must be a valid UUID',
+    to_account_uuid: Joi.string().length(8).required().messages({
+        'any.required': 'To account ID is required',
+        'string.length': 'To account ID must be a valid account ID',
     }),
     amount: Joi.number().positive().required().messages({
         'any.required': 'Amount is required and must be a positive number',

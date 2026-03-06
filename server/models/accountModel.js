@@ -1,3 +1,9 @@
+const crypto = require('crypto');
+
+// generate a short 8-character alphanumeric ID — random enough for client-facing use
+// without exposing the sequential integer primary key
+const generateShortId = () => crypto.randomBytes(4).toString('hex');
+
 module.exports = (sequelize, DataTypes) => {
     const Account = sequelize.define('account', {
         id: {
@@ -5,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        // public-facing identifier — users see this instead of the integer id
+        // public-facing identifier e.g. "a3f8c2d1"
         uuid: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
+            defaultValue: generateShortId,
         },
         name: {
             type: DataTypes.STRING,
@@ -22,13 +29,6 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 isFloat: true,
                 min: 0,
-            },
-        },
-    }, {
-        hooks: {
-            // generate a uuid before each new account is inserted
-            beforeCreate: (account) => {
-                account.uuid = require('crypto').randomUUID();
             },
         },
     });
