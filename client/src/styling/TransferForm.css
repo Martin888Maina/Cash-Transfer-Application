@@ -1,166 +1,125 @@
-/* TransferForm.css */
+/* transfer form */
 
-/* Style for the main transfer form container */
 .transfer-container {
-  max-width: 500px;  /* Limit the width of the form to 500px */
-  margin: 2rem auto;  /* Center the form horizontally with some margin at the top and bottom */
-  padding: 2.5rem;  /* Add padding inside the container */
-  background: white;  /* Set background color to white */
-  border-radius: 16px;  /* Round the corners of the form */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);  /* Apply a soft shadow around the container */
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 36px;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
 }
 
-/* Style for the title of the transfer form */
 .transfer-title {
-  color: #1a365d;  /* Set text color to dark blue */
-  font-size: 2rem;  /* Set font size for the title */
-  margin-bottom: 2rem;  /* Add margin below the title */
-  text-align: center;  /* Center-align the title */
-  font-weight: 700;  /* Make the title bold */
+    color: #212121;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 24px;
+    text-align: center;
 }
 
-/* Style for the form itself (flex layout) */
 .transfer-form {
-  display: flex;  /* Use flexbox for layout */
-  flex-direction: column;  /* Stack form fields vertically */
-  gap: 1.5rem;  /* Add space between form fields */
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
-/* Style for each individual form field container */
 .form-field {
-  display: flex;  /* Use flexbox for layout */
-  flex-direction: column;  /* Stack label and input vertically */
-  gap: 0.5rem;  /* Add space between label and input */
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-/* Style for the form field labels */
 .form-label {
-  color: #4a5568;  /* Set text color to dark gray */
-  font-size: 0.95rem;  /* Set font size slightly smaller */
-  font-weight: 500;  /* Set font weight to medium */
+    color: #424242;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
-/* Style for the form input fields */
 .form-input {
-  padding: 0.875rem;  /* Add padding inside the input field */
-  border: 2px solid #e2e8f0;  /* Add a light gray border */
-  border-radius: 10px;  /* Round the corners of the input fields */
-  font-size: 1rem;  /* Set font size */
-  transition: all 0.2s ease;  /* Smooth transition for focus effects */
-  background: #f7fafc;  /* Set a light background color */
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #212121;
+    background: #fafafa;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
 }
 
-/* Focus effect for input fields */
 .form-input:focus {
-  outline: none;  /* Remove the default outline */
-  border-color: #4299e1;  /* Change the border color to blue when focused */
-  background: white;  /* Change background to white */
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);  /* Add a subtle blue glow around the input field */
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+    background: #ffffff;
 }
 
-/* Style for the placeholder text inside input fields */
 .form-input::placeholder {
-  color: #a0aec0;  /* Set placeholder text color to gray */
+    color: #bdbdbd;
 }
 
-/* Style for the transfer button */
+/* the little "Sender: John" hint under the account ID input */
+.account-name {
+    font-size: 0.8rem;
+    color: #2e7d32;
+    font-weight: 500;
+    padding-left: 2px;
+}
+
 .transfer-button {
-  background: linear-gradient(45deg, #4299e1, #667eea);  /* Apply a gradient background to the button */
-  color: white;  /* Set text color to white */
-  padding: 1rem;  /* Add padding inside the button */
-  border: none;  /* Remove the default border */
-  border-radius: 10px;  /* Round the corners of the button */
-  font-size: 1.1rem;  /* Set font size */
-  font-weight: 600;  /* Set font weight to semi-bold */
-  cursor: pointer;  /* Change cursor to pointer on hover */
-  transition: all 0.3s ease;  /* Smooth transition for hover/active states */
-  margin-top: 1rem;  /* Add margin above the button */
-  text-transform: uppercase;  /* Transform text to uppercase */
-  letter-spacing: 0.5px;  /* Add some space between letters */
+    background-color: #1a73e8;
+    color: #ffffff;
+    padding: 11px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
-/* Hover effect for the transfer button */
 .transfer-button:hover {
-  transform: translateY(-2px);  /* Slightly lift the button on hover */
-  box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);  /* Add a subtle shadow on hover */
+    background-color: #1558b0;
 }
 
-/* Active (click) effect for the transfer button */
 .transfer-button:active {
-  transform: translateY(0);  /* Remove the lift effect when the button is clicked */
+    transform: scale(0.99);
 }
 
-/* Style for alert messages (success/error) */
 .alert {
-  padding: 1rem;  /* Add padding inside the alert */
-  border-radius: 10px;  /* Round the corners of the alert */
-  margin-top: 1.5rem;  /* Add margin above the alert */
-  font-size: 0.95rem;  /* Set font size for alert text */
-  font-weight: 500;  /* Set font weight to medium */
-  animation: slideIn 0.3s ease;  /* Apply slide-in animation for alert */
-  display: flex;  /* Use flexbox to center content inside the alert */
-  align-items: center;  /* Vertically align the alert content */
-  justify-content: center;  /* Horizontally center the alert content */
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    animation: slideIn 0.25s ease;
 }
 
-/* Style for success alerts */
 .alert-success {
-  background-color: #c6f6d5;  /* Light green background color */
-  color: #276749;  /* Dark green text color */
-  border: 1px solid #9ae6b4;  /* Green border color */
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
 }
 
-/* Style for error alerts */
 .alert-error {
-  background-color: #fed7d7;  /* Light red background color */
-  color: #c53030;  /* Dark red text color */
-  border: 1px solid #feb2b2;  /* Red border color */
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
 }
 
-/* Keyframe animation for sliding in alerts */
 @keyframes slideIn {
-  from {
-    opacity: 0;  /* Start with the alert being invisible */
-    transform: translateY(-10px);  /* Start from slightly above its final position */
-  }
-  to {
-    opacity: 1;  /* End with full opacity */
-    transform: translateY(0);  /* End at its original position */
-  }
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Style for card icons inside the form */
-.card-icon {
-  position: absolute;  /* Position the icon absolutely within its parent */
-  right: 1rem;  /* Place the icon 1rem from the right edge */
-  top: 50%;  /* Center the icon vertically */
-  transform: translateY(-50%);  /* Adjust vertical position for perfect centering */
-  color: #a0aec0;  /* Set the icon color to light gray */
-}
-
-/* Responsive Design */
-
-/* Media query for screens smaller than 640px (mobile devices) */
 @media (max-width: 640px) {
-  /* Adjust transfer form container for small screens */
-  .transfer-container {
-      margin: 1rem;  /* Reduce margin */
-      padding: 1.5rem;  /* Reduce padding */
-  }
+    .transfer-container {
+        margin: 20px 16px;
+        padding: 24px 20px;
+    }
 
-  /* Adjust title size for small screens */
-  .transfer-title {
-      font-size: 1.75rem;  /* Reduce font size */
-      margin-bottom: 1.5rem;  /* Reduce margin below title */
-  }
-
-  /* Adjust form input padding and button size for small screens */
-  .form-input {
-      padding: 0.75rem;  /* Reduce padding */
-  }
-
-  .transfer-button {
-      padding: 0.875rem;  /* Reduce padding */
-      font-size: 1rem;  /* Reduce font size */
-  }
+    .transfer-title {
+        font-size: 1.4rem;
+    }
 }

@@ -1,139 +1,132 @@
-/* ViewAccount.css */
+/* accounts page — search by ID and full account list */
 
-/* Main container style for the View Account page */
 .view-container {
-  max-width: 600px;  /* Set the maximum width to 600px */
-  margin: 2rem auto;  /* Center the container with margin on top and bottom */
-  padding: 2rem;  /* Add padding inside the container */
+    max-width: 760px;
+    margin: 40px auto;
+    padding: 0 24px 40px;
 }
 
-/* Style for the title of the View Account section */
 .view-title {
-  color: #2d3748;  /* Set text color to dark gray */
-  font-size: 2.2rem;  /* Set font size for the title */
-  text-align: center;  /* Center-align the title */
-  margin-bottom: 2rem;  /* Add margin below the title */
-  font-weight: 700;  /* Make the title bold */
+    color: #212121;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 24px;
 }
 
-/* Style for the search bar container */
+/* search row */
 .search-container {
-  display: flex;  /* Use flexbox layout for the search elements */
-  gap: 1rem;  /* Add space between the search input and button */
-  margin-bottom: 2rem;  /* Add space below the search container */
-  align-items: center;  /* Vertically align the items */
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    align-items: center;
 }
 
-/* Style for the search input field */
 .search-input {
-  flex: 1;  /* Make the input field take up the available space */
-  padding: 0.875rem 1rem;  /* Add padding inside the input field */
-  border: 2px solid #e2e8f0;  /* Add light gray border */
-  border-radius: 10px;  /* Round the corners of the input field */
-  font-size: 1rem;  /* Set font size */
-  transition: all 0.2s ease;  /* Smooth transition for focus effect */
-  background: #f7fafc;  /* Set light background color */
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: #fafafa;
+    color: #212121;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Focus effect for search input field */
 .search-input:focus {
-  outline: none;  /* Remove default outline */
-  border-color: #4299e1;  /* Change border color to blue on focus */
-  background: white;  /* Set background to white on focus */
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);  /* Add a subtle blue shadow */
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+    background: #ffffff;
 }
 
-/* Style for the search button */
 .search-button {
-  padding: 0.875rem 1.5rem;  /* Add padding inside the button */
-  background: #4299e1;  /* Set blue background */
-  color: white;  /* Set button text color to white */
-  border: none;  /* Remove the default border */
-  border-radius: 10px;  /* Round the corners of the button */
-  font-size: 1rem;  /* Set font size */
-  font-weight: 600;  /* Set font weight to semi-bold */
-  cursor: pointer;  /* Change cursor to pointer on hover */
-  transition: all 0.2s ease;  /* Smooth transition for hover and active effects */
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
 }
 
-/* Hover effect for the search button */
-.search-button:hover {
-  background: #3182ce;  /* Change background to a darker blue */
-  transform: translateY(-2px);  /* Slightly lift the button */
-  box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);  /* Add a subtle shadow on hover */
+.search-button:hover:not(:disabled) {
+    background-color: #1558b0;
 }
 
-/* Active (click) effect for the search button */
-.search-button:active {
-  transform: translateY(0);  /* Remove the lift effect when clicked */
+.search-button:disabled {
+    background-color: #90bef5;
+    cursor: not-allowed;
 }
 
-/* Style for the account details container */
+/* single account result card */
 .account-details {
-  background: white;  /* Set background color to white */
-  border-radius: 16px;  /* Round the corners of the container */
-  padding: 2rem;  /* Add padding inside the container */
-  margin-top: 2rem;  /* Add margin above the account details section */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);  /* Apply a soft shadow around the container */
-  animation: slideUp 0.3s ease-out;  /* Apply slide-up animation when details appear */
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    animation: slideUp 0.25s ease-out;
 }
 
-/* Style for the title of the account details section */
 .details-title {
-  color: #2d3748;  /* Set text color to dark gray */
-  font-size: 1.5rem;  /* Set font size */
-  margin-bottom: 1.5rem;  /* Add margin below the title */
-  padding-bottom: 1rem;  /* Add padding below the title */
-  border-bottom: 2px solid #e2e8f0;  /* Add a bottom border */
-  font-weight: 600;  /* Set font weight to semi-bold */
+    color: #212121;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-/* Style for individual detail items (label and value) */
 .detail-item {
-  display: flex;  /* Use flexbox to arrange the label and value side by side */
-  justify-content: space-between;  /* Spread the label and value to opposite sides */
-  padding: 1rem 0;  /* Add padding to the top and bottom of the item */
-  border-bottom: 1px solid #edf2f7;  /* Add a bottom border */
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
 }
 
-/* Style for the label of account details */
+.detail-item:last-child {
+    border-bottom: none;
+}
+
 .detail-label {
-  color: #718096;  /* Set text color to a lighter gray */
-  font-weight: 500;  /* Set font weight to medium */
+    color: #757575;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
-/* Style for the value of account details */
 .detail-value {
-  color: #2d3748;  /* Set text color to dark gray */
-  font-weight: 600;  /* Set font weight to semi-bold */
+    color: #212121;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-/* Style for the balance value, with specific color and size */
 .balance-value {
-  color: #38a169;  /* Set green color for the balance value */
-  font-weight: 700;  /* Set font weight to bold */
-  font-size: 1.1rem;  /* Set font size slightly larger */
+    color: #2e7d32;
+    font-weight: 700;
 }
 
-/* Keyframe animation for sliding up the account details */
-@keyframes slideUp {
-  from {
-    opacity: 0;  /* Start with the account details being invisible */
-    transform: translateY(20px);  /* Start from slightly below */
-  }
-  to {
-    opacity: 1;  /* Fade in the account details */
-    transform: translateY(0);  /* End at its original position */
-  }
+/* error under search bar */
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.875rem;
+    margin-bottom: 20px;
 }
 
-/* all-accounts list section */
+/* all accounts section */
 .all-accounts-section {
-    margin-top: 2.5rem;
+    margin-top: 8px;
 }
 
 .section-heading {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #212121;
     margin: 0 0 14px;
@@ -148,9 +141,10 @@
     border-collapse: collapse;
     font-size: 0.9rem;
     background: #ffffff;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .accounts-table th {
@@ -181,7 +175,7 @@
 
 .id-cell {
     color: #9e9e9e;
-    font-size: 0.85rem;
+    font-size: 0.825rem;
 }
 
 .balance-cell {
@@ -198,7 +192,7 @@
     border: 1px solid #ef9a9a;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s;
 }
 
 .delete-btn:hover:not(:disabled) {
@@ -213,49 +207,27 @@
 
 .no-accounts-text {
     color: #757575;
-    font-size: 0.95rem;
-    padding: 24px 0;
+    font-size: 0.9rem;
+    padding: 20px 0;
 }
 
-.error-message {
-    background-color: #ffebee;
-    color: #c62828;
-    border: 1px solid #ef9a9a;
-    border-radius: 6px;
-    padding: 10px 14px;
-    font-size: 0.875rem;
-    margin-bottom: 16px;
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Design */
-
-/* Media query for small screens (max width 640px) */
 @media (max-width: 640px) {
-  /* Adjust the view container for smaller screens */
-  .view-container {
-      margin: 1rem;  /* Reduce margin */
-      padding: 1rem;  /* Reduce padding */
-  }
+    .view-container {
+        margin: 20px 0;
+        padding: 0 16px 32px;
+    }
 
-  /* Adjust title font size and margin for small screens */
-  .view-title {
-      font-size: 1.8rem;  /* Decrease font size */
-      margin-bottom: 1.5rem;  /* Reduce margin below the title */
-  }
+    .search-container {
+        flex-direction: column;
+    }
 
-  /* Change search container to vertical layout on small screens */
-  .search-container {
-      flex-direction: column;  /* Stack search elements vertically */
-  }
-
-  /* Ensure input and button take up full width on small screens */
-  .search-input, 
-  .search-button {
-      width: 100%;  /* Set width to 100% for both input and button */
-  }
-
-  /* Adjust account details padding for smaller screens */
-  .account-details {
-      padding: 1.5rem;  /* Reduce padding inside the account details section */
-  }
+    .search-input,
+    .search-button {
+        width: 100%;
+    }
 }

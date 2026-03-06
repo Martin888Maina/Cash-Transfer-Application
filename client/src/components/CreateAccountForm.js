@@ -31,9 +31,8 @@ const CreateAccountForm = () => {
       setAlertMessage(`Account created with ID: ${response.data.id}`);
       setAlertType('success');
     } catch (error) {
-      //displays an error message in the console
-      console.error('Error creating account', error);
-      setAlertMessage('Failed to create account');
+      const msg = error.response?.data?.error?.message || 'Failed to create account. Please try again.';
+      setAlertMessage(msg);
       setAlertType('error');
     }
   };

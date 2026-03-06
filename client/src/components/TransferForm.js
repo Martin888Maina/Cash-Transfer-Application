@@ -75,9 +75,9 @@ const TransferForm = () => {
       setFromAccountName('');
       setToAccountName('');
     } catch (error) {
-      //logs and display error message if transfer fails
-      console.error('Error transferring money', error);
-      setAlertMessage('Failed to transfer money');
+      // show the server's reason if it gave one (e.g. "Insufficient funds")
+      const msg = error.response?.data?.error?.message || 'Failed to transfer money. Please try again.';
+      setAlertMessage(msg);
       setAlertType('error');
     }
   };
