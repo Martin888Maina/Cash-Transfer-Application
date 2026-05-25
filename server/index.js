@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const app = express();
 
-// helmet sets sensible security headers with one line
+// Sets secure HTTP response headers to mitigate common web vulnerabilities.
 app.use(helmet());
 
 // read allowed origin from env so we don't hardcode it
@@ -42,18 +42,18 @@ app.use('/Auth', authLimiter, authRoute);
 app.use('/Account', apiLimiter, accountRoute);
 app.use('/Transfer', apiLimiter, transferRoute);
 
-// 404 handler for any route that doesn't match above
+// Catches any request that did not match a defined route.
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// pull in the centralized error handler
 const errorHandler = require('./middleware/errorHandler');
 app.use(errorHandler);
 
+const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Server is running on Port: ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on ${HOST}:${PORT}`);
 });
