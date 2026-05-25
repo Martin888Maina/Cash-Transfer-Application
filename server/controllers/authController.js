@@ -6,7 +6,6 @@ const { registerSchema, loginSchema } = require('../validation/validation_Schema
 
 const User = db.users;
 
-// signs a token that lasts 7 days
 const signToken = (user) => {
     return jwt.sign(
         { id: user.id, email: user.email, name: user.name },
@@ -25,7 +24,6 @@ module.exports = {
 
             const { name, email, password } = req.body;
 
-            // bail out early if email is already taken
             const existing = await User.findOne({ where: { email } });
             if (existing) {
                 throw createError(409, 'An account with that email already exists.');

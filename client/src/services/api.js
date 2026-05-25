@@ -8,7 +8,7 @@ const api = axios.create({
     },
 });
 
-// attach the stored JWT to every outgoing request
+// Injects the stored JWT so protected endpoints receive authentication on every request.
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {

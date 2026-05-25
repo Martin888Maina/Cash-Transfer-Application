@@ -41,7 +41,6 @@ module.exports = {
         }
     },
 
-    // list every account
     getAllAccounts: async (req, res, next) => {
         try {
             const accounts = await Account.findAll({
@@ -53,7 +52,7 @@ module.exports = {
         }
     },
 
-    // delete by uuid — balance must be zero first
+    // Prevents deletion of accounts with outstanding funds to avoid silent balance loss.
     deleteAccount: async (req, res, next) => {
         try {
             const account = await Account.findOne({
@@ -75,7 +74,6 @@ module.exports = {
         }
     },
 
-    // summary stats for the dashboard
     getStats: async (req, res, next) => {
         try {
             const totalAccounts = await Account.count();
@@ -116,7 +114,6 @@ module.exports = {
         const transaction = await db.sequelize.transaction();
 
         try {
-            // resolve uuids to actual account rows
             const fromAccount = await Account.findOne({ where: { uuid: from_account_uuid } });
             const toAccount = await Account.findOne({ where: { uuid: to_account_uuid } });
 
@@ -124,7 +121,7 @@ module.exports = {
                 throw createError(404, 'One or both accounts not found');
             }
 
-            // edge case: can't transfer to yourself
+            // Rejects same-account transfers, which would silently succeed but leave balances unchanged.
             if (fromAccount.id === toAccount.id) {
                 throw createError(400, 'Cannot transfer funds to the same account');
             }
@@ -150,7 +147,6 @@ module.exports = {
         }
     },
 
-    // full transfer list with sender and receiver names
     getAllTransfers: async (req, res, next) => {
         try {
             const transfers = await Transfer.findAll({

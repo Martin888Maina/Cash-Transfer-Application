@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const createError = require('http-errors');
 
-// pulls the token from the Authorization header and verifies it
+// Rejects requests without a valid JWT before they reach any protected controller.
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]; // "Bearer <token>"
